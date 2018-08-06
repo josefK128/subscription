@@ -1,4 +1,4 @@
-var OracleContract = require('./build/contracts/Subscription.json')
+var SubscriptionContract = require('./build/contracts/Subscription.json')
 var contract = require('truffle-contract')
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
@@ -6,21 +6,21 @@ var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 
 // Truffle abstraction to interact with our
 // deployed contract
-var oracleContract = contract(OracleContract)
-oracleContract.setProvider(web3.currentProvider)
+var subscriptionContract = contract(SubscriptionContract)
+subscriptionContract.setProvider(web3.currentProvider)
 
 // Dirty hack for web3@1.0.0 support for localhost testrpc
 // see https://github.com/trufflesuite/truffle-contract/issues/56#issuecomment-331084530
-if (typeof oracleContract.currentProvider.sendAsync !== "function") {
-  oracleContract.currentProvider.sendAsync = function() {
-    return oracleContract.currentProvider.send.apply(
-      oracleContract.currentProvider, arguments
+if (typeof subscriptionContract.currentProvider.sendAsync !== "function") {
+  subscriptionContract.currentProvider.sendAsync = function() {
+    return subscriptionContract.currentProvider.send.apply(
+      subscriptionContract.currentProvider, arguments
     );
   };
 }
 
 web3.eth.getAccounts((err, accounts) => {
-  oracleContract.deployed()
+  subscriptionContract.deployed()
   .then((subscriptionInstance) => {
     // Our promises
     const oraclePromises = [

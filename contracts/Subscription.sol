@@ -33,7 +33,7 @@ contract Subscription {
       emit Price(priceETHUSD);
   }
 
-  function update(t) public {
+  function update() public {
       // trigger event
       emit PriceQuery();
   }
