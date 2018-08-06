@@ -31,10 +31,10 @@ contract Subscription {
   function callback(uint result) public {
       priceETHUSD = result;
       emit Price(priceETHUSD);
-      //update();
   }
 
-  function update() public payable {
+  function update() public {
+      // trigger event
       emit PriceQuery();
   }
 
