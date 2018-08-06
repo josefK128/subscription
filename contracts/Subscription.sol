@@ -33,7 +33,7 @@ contract Subscription {
       emit Price(priceETHUSD);
   }
 
-  function update() public {
+  function update(t) public {
       // trigger event
       emit PriceQuery();
   }
@@ -44,6 +44,12 @@ contract Subscription {
 
 
   function subscribe(string email) public payable{
+      // <TBD>
+      //require(msg.value && msg.value >= subscriptionPrice);
+      //add subscriptionPrice to account balance 
+      //if(msg.value > subscriptionPrice refund msg.value-subscriptionPrice
+      //Thus need address of client
+
       // trigger event
       emit Registered(email, priceETHUSD, block.number, block.timestamp);
   }

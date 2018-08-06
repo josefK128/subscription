@@ -21,11 +21,11 @@ if (typeof oracleContract.currentProvider.sendAsync !== "function") {
 
 web3.eth.getAccounts((err, accounts) => {
   oracleContract.deployed()
-  .then((subscriptionContract) => {
+  .then((oracleInstance) => {
     // Our promises
     const oraclePromises = [
-      subscriptionContract.getPrice(),  // Get currently stored BTC Cap
-      subscriptionContract.update({from: accounts[0]})  // Request oracle to update the information
+      oracleInstance.getPrice(),  // Get currently stored BTC Cap
+      oracleInstance.update({from: accounts[0]})  // Request oracle to update the information
     ]
 
     // Map over all promises
@@ -34,7 +34,7 @@ web3.eth.getAccounts((err, accounts) => {
         if(result[0] > 0){
           console.log('ETHUSD: ' + result[0])
           console.log('subscribing...');
-          subscriptionContract.subscribe('jack@gmail.com', {from: accounts[1]});
+          oracleInstance.subscribe('jack@gmail.com', {from: accounts[1]});
         }else{
           console.log('Request Oracle to send ETHUSD rate and subscribe to contract service - run again...')
         }
